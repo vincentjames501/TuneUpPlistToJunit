@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require_relative '../lib/tuneup_plist_to_junit_utils'
+
+# Parses our command line arguments as well as provide help, versioning, and default
+# command line arguments
+#
+# @param [Array] args the command line arguments
+# @return [OpenStruct] the processed options
+def parse_command_line_args(args)
+  options = OpenStruct.new
+
+  # Set our default input/output arguments
+  options.input = 'Automation Results.plist'
+  options.output = 'test_report.xml'
+
+  # Build our options parser
+  opt_parser = OptionParser.new do |opts|
+    opts.banner = 'Usage: TuneUpPlistToJunit.rb [options]'
+
+    opts.separator ''
+    opts.separator 'Specific options:'
+
+    # Mandatory arguments
+    opts.on('-i', '--input FILE', 'UIAutomation plist generated with TuneupJS.  Default: Automation Results.plist') do |input|
+      options.input = input
+    end
+
+    opts.on('-o', '--output FILE', 'Output location of JUnit test report.  Default: test_report.xml') do |output|
+      options.output = output
+    end
+
+    opts.separator ''
+    opts.separator 'Common options:'
+
+    # Optional arguments
+    opts.on_tail('-h', '--help', 'Show this message') do
+      puts opts
+      exit
+    end
+
+    opts.on_tail('-v', '--version', 'Show version') do
+      puts TuneUpPlistToJunit::VERSION
+      exit
+    end
+  end
+
+  # Parse our options and return the process options
+  opt_parser.parse!(args)
+  options
+end
+
+# Process the command line arguments
+options = parse_command_line_args(ARGV)
+
+# Convert the plist file to junit xml and write it to our destination
+junit_report = TuneUpPlistToJunitUtils.new.generate_reports(options.input)
+File.open(options.output, 'w') { |f| f.write(junit_report) }
+
