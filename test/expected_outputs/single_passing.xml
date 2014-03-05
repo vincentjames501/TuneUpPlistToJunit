@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <testsuite tests="1" errors="0" failures="0" timestamp="2014-03-04T20:36:27+00:00" time="14.0">
-  <testcase name="Holding login button shows the edit url popup" time="14.0"/>
+  <testcase name="Holding login button shows the edit url popup" time="14.0" classname="UIAutomation"/>
 </testsuite>

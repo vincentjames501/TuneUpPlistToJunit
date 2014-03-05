@@ -34,6 +34,7 @@ To use, simply use
     Specific options:
         -i, --input FILE                 UIAutomation plist generated with TuneupJS.  Default: Automation Results.plist
         -o, --output FILE                Output location of JUnit test report.  Default: test_report.xml
+        -c, --class-name CLASSNAME       The class name to use on the test case.  Default: UIAutomation
 
     Common options:
         -h, --help                       Show this message

@@ -70,7 +70,7 @@ class TuneUpPlistToJunitUtils
                         :timestamp => timestamp,
                         :messages => []}
 
-      # In order to add a message to our current test, the message type can't be a begin or end node
+        # In order to add a message to our current test, the message type can't be a begin or end node
       elsif current_test && log_message_type != END_FAILURE && log_message_type != END_SUCCESS && log_message_type != START_TEST
         message = log_message_type == SCREENSHOT ? screenshot : message
         message = "#{message} \nView Dump: \n#{JSON.pretty_generate(children)}\n" if children
@@ -79,8 +79,8 @@ class TuneUpPlistToJunitUtils
                                     :log_message_type => log_message_type,
                                     :timestamp => timestamp}
 
-      # If the current test is present and the message type is an end node, then add the current test to our tests and
-      # reset the current test
+        # If the current test is present and the message type is an end node, then add the current test to our tests and
+        # reset the current test
       elsif current_test && (log_message_type == END_FAILURE || log_message_type == END_SUCCESS)
         current_test[:end_message_type] = log_message_type
         current_test[:elapsed_time] = timestamp.to_time - current_test[:timestamp].to_time
@@ -96,8 +96,9 @@ class TuneUpPlistToJunitUtils
   # the tests can then me transformed into a junit style xml output
   #
   # @param tests [Array] array of processed plist tests as generated from (@see #convert_log_messages_to_tests)
+  # @param [String] junit_class_name the class name to append to each <testcase/> tag
   # @return [String] a junit xml string
-  def generate_junit_report(tests)
+  def generate_junit_report(tests, junit_class_name)
     # Gather our root <testsuite/> tag information
     total_tests = tests.size
     total_errors = tests.reduce(0) { |sum, t| sum + t[:messages].count { |m| m[:log_message_type] == LOG_ERROR } }
@@ -111,7 +112,7 @@ class TuneUpPlistToJunitUtils
       xml.testsuite(:tests => total_tests, :errors => total_errors, :failures => total_failures, :timestamp => starting_time, :time => total_time) {
         # For each of our tests we want to create a <testcase/> tag
         tests.each do |test|
-          xml.testcase(:name => test[:name], :time => test[:elapsed_time]) {
+          xml.testcase(:name => test[:name], :time => test[:elapsed_time], :classname => junit_class_name) {
 
             # If the test case ended in a failure, we want to add a <failure/> tag
             if test[:end_message_type] == END_FAILURE
@@ -146,11 +147,12 @@ class TuneUpPlistToJunitUtils
   # Process the plist file and generates a JUnit style xml string
   #
   # @param [String] plist_file_or_xml file name or xml of the UIAutomation plist file
+  # @param [String] junit_class_name the class name to append to each <testcase/> tag
   # @return [String] the JUnit style xml
-  def generate_reports(plist_file_or_xml)
+  def generate_reports(plist_file_or_xml, junit_class_name)
     log_messages = parse_plist(plist_file_or_xml)
     tests = convert_log_messages_to_tests(log_messages)
-    generate_junit_report(tests)
+    generate_junit_report(tests, junit_class_name)
   end
 
 end

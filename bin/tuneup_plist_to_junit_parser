@@ -11,9 +11,10 @@ require_relative '../lib/tuneup_plist_to_junit_utils'
 def parse_command_line_args(args)
   options = OpenStruct.new
 
-  # Set our default input/output arguments
+  # Set our default input/output and class name arguments
   options.input = 'Automation Results.plist'
   options.output = 'test_report.xml'
+  options.class_name = 'UIAutomation'
 
   # Build our options parser
   opt_parser = OptionParser.new do |opts|
@@ -29,6 +30,10 @@ def parse_command_line_args(args)
 
     opts.on('-o', '--output FILE', 'Output location of JUnit test report.  Default: test_report.xml') do |output|
       options.output = output
+    end
+
+    opts.on('-c', '--class-name CLASSNAME', 'The class name to use on the test case.  Default: UIAutomation') do |output|
+      options.class_name = output
     end
 
     opts.separator ''
@@ -55,6 +60,6 @@ end
 options = parse_command_line_args(ARGV)
 
 # Convert the plist file to junit xml and write it to our destination
-junit_report = TuneUpPlistToJunitUtils.new.generate_reports(options.input)
+junit_report = TuneUpPlistToJunitUtils.new.generate_reports(options.input, options.class_name)
 File.open(options.output, 'w') { |f| f.write(junit_report) }
 

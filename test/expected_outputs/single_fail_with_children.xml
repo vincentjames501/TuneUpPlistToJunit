@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <testsuite tests="1" errors="1" failures="1" timestamp="2014-03-04T20:37:06+00:00" time="3.0">
-  <testcase name="Clicking on the first template shows the compose screen." time="3.0">
+  <testcase name="Clicking on the first template shows the compose screen." time="3.0" classname="UIAutomation">
     <failure message="Clicking on the first template shows the compose screen." type="Fail"/>
     <system-out>target.frontMostApp().mainWindow().tableViews()["Message Templates Table"].cells()[0].tap()</system-out>
     <error message="AssertionException: &quot;Expected &lt;The following is a test of the Edmonds Community College Mass Notification System. The following is a test of the Edmonds Community College Mass Notification System. If this was an actual emergency, you would receive essential news and information.&gt; but received &lt;An intruder has been spotted on campus&gt;&quot;" type="Error"/>

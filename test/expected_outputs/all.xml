@@ -1,32 +1,32 @@
 <?xml version="1.0"?>
 <testsuite tests="12" errors="3" failures="3" timestamp="2014-03-04T20:36:27+00:00" time="166.0">
-  <testcase name="Holding login button shows the edit url popup" time="14.0">
+  <testcase name="Holding login button shows the edit url popup" time="14.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().buttons()["Login Button"].touchAndHold("5.5")</system-out>
     <system-out>target.frontMostApp().mainWindow().textViews()[0].touchAndHold("1.1")</system-out>
     <system-out>target.frontMostApp().editingMenu().elements()["Select All"].tap()</system-out>
     <system-out>target.frontMostApp().keyboard().typeString("http://vince.poweredbypeanuts.com:3000/api")</system-out>
     <system-out>target.frontMostApp().mainWindow().buttons()[1].tap()</system-out>
   </testcase>
-  <testcase name="Login button takes us to the login webview" time="2.0">
+  <testcase name="Login button takes us to the login webview" time="2.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().buttons()["Login Button"].tap()</system-out>
   </testcase>
-  <testcase name="Searching for provider yeilds only one result" time="3.0">
+  <testcase name="Searching for provider yeilds only one result" time="3.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().scrollViews()[0].webViews()[0].textFields()[0].tap()</system-out>
     <system-out>target.frontMostApp().keyboard().typeString("DemoDummy")</system-out>
   </testcase>
-  <testcase name="Tapping the provider link brings us to the demo login page" time="3.0">
+  <testcase name="Tapping the provider link brings us to the demo login page" time="3.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().scrollViews()[0].webViews()[0].links()["DemoDummy"].tap()</system-out>
   </testcase>
-  <testcase name="Logging in with our dummy user shows the login screen, then inbox" time="8.0">
+  <testcase name="Logging in with our dummy user shows the login screen, then inbox" time="8.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().scrollViews()[0].webViews()[0].textFields()[0].tap()</system-out>
     <system-out>target.frontMostApp().keyboard().typeString("automated@singlewire.com")</system-out>
     <system-out>target.frontMostApp().mainWindow().scrollViews()[0].webViews()[0].buttons()["Login"].tap()</system-out>
   </testcase>
-  <testcase name="Inbox contains no initial rows" time="8.0"/>
-  <testcase name="Clicking on the compose icon starts the loading process.  Initial templates show." time="1.0">
+  <testcase name="Inbox contains no initial rows" time="8.0" classname="UIAutomation"/>
+  <testcase name="Clicking on the compose icon starts the loading process.  Initial templates show." time="1.0" classname="UIAutomation">
     <system-out>target.frontMostApp().navigationBar().rightButton().tap()</system-out>
   </testcase>
-  <testcase name="Clicking on the first template shows the compose screen." time="3.0">
+  <testcase name="Clicking on the first template shows the compose screen." time="3.0" classname="UIAutomation">
     <failure message="Clicking on the first template shows the compose screen." type="Fail"/>
     <system-out>target.frontMostApp().mainWindow().tableViews()["Message Templates Table"].cells()[0].tap()</system-out>
     <error message="AssertionException: &quot;Expected &lt;The following is a test of the Edmonds Community College Mass Notification System. The following is a test of the Edmonds Community College Mass Notification System. If this was an actual emergency, you would receive essential news and information.&gt; but received &lt;An intruder has been spotted on campus&gt;&quot;" type="Error"/>
@@ -707,7 +707,7 @@ View Dump:
     <system-out>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "Clicking on the first template shows the compose screen.-fail")</system-out>
     <system-out>3696C5B1-5177-4A8A-8FAD-9D7EEBE4B9C8</system-out>
   </testcase>
-  <testcase name="Clicking the send button starts the send process.  We receive the notification within 10 seconds." time="112.0">
+  <testcase name="Clicking the send button starts the send process.  We receive the notification within 10 seconds." time="112.0" classname="UIAutomation">
     <failure message="Clicking the send button starts the send process.  We receive the notification within 10 seconds." type="Fail"/>
     <system-out>target.frontMostApp().navigationBar().rightButton().tap()</system-out>
     <error message="AssertionException: &quot;Expected &lt;1&gt; but received &lt;0&gt;&quot;" type="Error"/>
@@ -902,7 +902,7 @@ View Dump:
     <system-out>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "Clicking the send button starts the send process.  We receive the notification within 10 seconds.-fail")</system-out>
     <system-out>4A226AB2-F15D-4ACF-A508-9B1A1868230B</system-out>
   </testcase>
-  <testcase name="Deleting the notification removes it from the table view" time="10.0">
+  <testcase name="Deleting the notification removes it from the table view" time="10.0" classname="UIAutomation">
     <failure message="Deleting the notification removes it from the table view" type="Fail"/>
     <system-out>Cannot perform action on invalid element: UIAElementNil from target.frontMostApp().mainWindow().tableViews()["Inbox Table"].cells()[0]</system-out>
     <error message="VerboseError: Cannot perform action on invalid element: UIAElementNil from target.frontMostApp().mainWindow().tableViews()[&quot;Inbox Table&quot;].cells()[0]" type="Error"/>
@@ -1097,10 +1097,10 @@ View Dump:
     <system-out>target.captureRectWithName("{origin:{x:0.00,y:0.00}, size:{height:568.00,width:320.00}}", "Deleting the notification removes it from the table view-fail")</system-out>
     <system-out>119716EC-B426-42CE-B90E-0A4F553254FD</system-out>
   </testcase>
-  <testcase name="Clicking the menu icon shows the slide out menu with the correct details" time="0.0">
+  <testcase name="Clicking the menu icon shows the slide out menu with the correct details" time="0.0" classname="UIAutomation">
     <system-out>target.frontMostApp().navigationBar().leftButton().tap()</system-out>
   </testcase>
-  <testcase name="Clicking the log out button starts the log out process" time="2.0">
+  <testcase name="Clicking the log out button starts the log out process" time="2.0" classname="UIAutomation">
     <system-out>target.frontMostApp().mainWindow().tableViews()["Menu Table"].cells()["Log Out"].tap()</system-out>
   </testcase>
 </testsuite>
