@@ -133,7 +133,6 @@ class TuneUpPlistToJunitUtils
 
                 # This is likely the LOG_ERROR case which we'll record it as an <error/> tag
                 else
-                  puts message.inspect
                   xml.error(:message => message[:message], :type => message[:log_type])
               end
             end
