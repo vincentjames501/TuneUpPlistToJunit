@@ -6,6 +6,7 @@ require 'JSON'
 class TuneUpPlistToJunitUtils
   #Constants that refer to the <Type> plist tag
   LOG_DEBUG = 0
+  LOG_DEFAULT = 1
   LOG_ERROR = 3
   START_TEST = 4
   END_SUCCESS = 5
@@ -13,6 +14,7 @@ class TuneUpPlistToJunitUtils
   SCREENSHOT = 8
 
   private_constant :LOG_DEBUG
+  private_constant :LOG_DEFAULT
   private_constant :LOG_ERROR
   private_constant :START_TEST
   private_constant :END_SUCCESS
@@ -124,7 +126,7 @@ class TuneUpPlistToJunitUtils
               case message[:log_message_type]
 
                 # For debug and screenshot, we'll convert the messages to a <system-out/> tag
-                when LOG_DEBUG, SCREENSHOT
+                when LOG_DEBUG, LOG_DEFAULT, SCREENSHOT
                   xml.send(:"system-out") {
                     xml.text message[:message]
                   }
